@@ -1,0 +1,31 @@
+<?php
+/*
+ * Plugin Name: WPML Shortcode
+ * Plugin URI: http://wpexplorer.com
+ * Description: Easily translate strings via a WPML Shortcode
+ * Version: 1.0
+ * Author: WPExplorer.com
+ * Author URI: http://wpexplorer.com
+ *
+*/
+
+if( !function_exists( 'wpex_wpml_lang_translate' ) ) {
+	function wpex_wpml_lang_translate( $atts, $content = null ) {
+		extract( shortcode_atts( array(
+			'lang'	=> '',
+		), $atts ) );
+		$lang_active = ICL_LANGUAGE_CODE;
+		if($lang == $lang_active){
+			return do_shortcode($content);
+		}
+	}
+	add_shortcode( 'wpml_translate', 'wpex_wpml_lang_translate' );
+}
+
+/*
+ * Shortcode Usage
+ *
+ *[wpml_translate lang=es]Hola[/wpml_translate]
+ *[wpml_translate lang=en]Hello[/wpml_translate]
+ *
+*/
